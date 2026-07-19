@@ -52,13 +52,29 @@ pip install numpy
 python cet_stress_test.py
 ```
 
-
 ## Intent
 
 This work is shared to:
 - Encourage interdisciplinary dialogue
 - Clarify conceptual distinctions between physics and metaphysics
 - Invite thoughtful critique grounded in rigor and good faith
+
+- 
+## Hardware Calibration & Differential Diagnostics
+
+To transition the CET framework from software matrices to physical hardware testing, our desktop prototype utilizes a two-part calibration and filtering protocol designed to isolate non-local phase variations ($\Delta\phi$) from ambient laboratory noise.
+
+### 1. Physical Hardware Verification Protocol
+Before data acquisition begins, the benchtop sensing unit undergoes a rigorous three-stage physical calibration sequence to secure an absolute zero-field environment ($\mathbf{B} = 0$):
+* **Chamber Sealing**: The Oval-Profile Vacuum Chamber is drawn to high vacuum, testing the interlocking carbon-fiber quadrant exoskeleton for mechanical stability and monitoring seals for 12 hours against micro-leaks.
+* **Ambient Field Nulling**: The nesting Constraint Shield Enclosure is verified via internal three-axis fluxgate magnetometers. The multi-layered Mu-metal shields must attenuate Earth's ambient magnetic field from $\approx 50\ \mu\text{T}$ down to strictly under $10\text{ nT}$.
+* **Confinement Loop Testing**: The internal Deformed SCM Coil undergoes a 0 to 5 A sweep to verify that the magnetic field ($\mathbf{B}$) remains entirely confined internally, allowing only the vector potential ($\mathbf{A}$) to radiate outward into the sensor coordinate coordinates.
+
+### 2. Live Differential Noise Firewall
+To eliminate false positives caused by power-line hum, Wi-Fi spikes, or physical desk vibrations, the data acquisition architecture utilizes a differential diagnostic script. 
+
+The pipeline cross-correlates telemetry from an unprotected external reference sensor with the isolated internal sensor array. By computing the real-time covariance and cross-correlation coefficient, the software instantly flags and discards any internal phase changes that align with external environmental spikes, preserving only true, un-triggered non-local anomalies.
+
 
 ## Author
 
