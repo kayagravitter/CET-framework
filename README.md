@@ -37,6 +37,22 @@ Interpretive extensions are explicitly philosophical in nature.
 - This repository represents an **early, non-exhaustive public articulation**.
 - Further formalization, collaboration, and review are anticipated.
 
+## Algorithmic Validation
+
+### Numerical Simulation Stress-Test (`cet_stress_test.py`)
+This repository now contains a functional numerical physics simulation script designed to evaluate the software data analysis pipeline of the CET ecosystem under controlled, room-temperature thermal static.
+
+#### Theoretical Foundation
+The script implements a multi-dimensional coordinate matrix to simulate an environment where classical magnetic fields are shielded to zero ($\mathbf{B} = \nabla \times \mathbf{A} = 0$), relying entirely on tracking subtle topological phase perturbations ($\Delta\phi$) across a relational constraint grid. This mimics the core baseline parameters of the CET terrestrial electronic desktop hardware prototype.
+
+#### How to Execute
+The validation loop is lightweight and runs locally using the standard **NumPy** library.
+```bash
+pip install numpy
+python cet_stress_test.py
+```
+
+
 ## Intent
 
 This work is shared to:
@@ -49,3 +65,4 @@ This work is shared to:
 Kaya Gravitter  
 Independent Researcher  
 Founder, Creationist Entanglement Theory (CET)
+
