@@ -33,7 +33,7 @@ def run_cet_simulation(grid_dim=10, coupling_strength=0.05, noise_floor=1.0, see
 
     # 4. Apply a simple geometric constraint filter
     active_zone = radius <= 4.0
-relational_mask = np.where(active_zone, 1.0, 0.0)
+    relational_mask = np.where(active_zone, 1.0, 0.0)
 
     filtered_output = raw_daq_stream * relational_mask
 
