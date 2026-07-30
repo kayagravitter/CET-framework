@@ -32,7 +32,9 @@ def run_cet_simulation(grid_dim=10, coupling_strength=0.05, noise_floor=1.0, see
     raw_daq_stream = (coupling_strength * true_signal) + stochastic_noise
 
     # 4. Apply a simple geometric constraint filter
-    relational_mask = np.where(radius <= 4.0, 1.0, 0.0)
+    active_zone = radius <= 4.0
+relational_mask = np.where(active_zone, 1.0, 0.0)
+
     filtered_output = raw_daq_stream * relational_mask
 
     # 5. Estimate signal and residual noise consistently
@@ -41,7 +43,8 @@ def run_cet_simulation(grid_dim=10, coupling_strength=0.05, noise_floor=1.0, see
     filtered_residual = filtered_output - (expected_signal * relational_mask)
 
     signal_to_noise_raw = np.mean(expected_signal) / np.std(raw_residual)
-    signal_to_noise_filtered = np.mean(expected_signal * relational_mask) / np.std(filtered_residual)
+    signal_to_noise_filtered = np.mean(expected_signal[active_zone]) / np.std(filtered_residual[active_zone])
+
 
     print("=== CET CONCEPTUAL STRESS-TEST RESULTS ===")
     print(f"Grid configuration      : {grid_dim}x{grid_dim}x{grid_dim}")
