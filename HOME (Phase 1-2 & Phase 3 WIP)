@@ -1,0 +1,29 @@
+# Welcome to the CET-framework Wiki: A Living Manifesto
+
+Welcome to the official development roadmap and conceptual documentation hub for the **Creationist Entanglement Theory (CET)** ecosystem. This living manifesto tracks our systematic shift away from the matter-first, reductionist traps of "existing physics" toward a top-down, constraint-first reality.
+
+---
+
+## The Three-Phase Frontier Roadmap
+
+To translate our systems ontology into empirical, independently verifiable datasets, the CET ecosystem moves sequentially across three operational phases:
+
+### Phase 1: Algorithmic Validation 
+* **Status**: **ACTIVE / PUBLIC**
+* **Milestone**: The primary numerical simulation model (`cet_stress_test.py`) is live. It mathematically verifies that structured vector potential fields ($\mathbf{A}$) can be isolated from dense, room-temperature stochastic noise floors using a topological relational constraint matrix.
+
+### Phase 2: Terrestrial Desktop Prototyping
+* **Status**: **IN DEVELOPMENT**
+* **Milestone**: Scaling down our physical hardware containment loops into an optimized, desk-compatible footprint. This phase focuses on constructing the high-vacuum oval chamber and multi-layered Mu-metal shields to enforce a localized zero-force zone ($\mathbf{B}=0$), allowing our high-resolution sensor array to track non-local Aharonov-Bohm phase shifts ($\Delta\phi$).
+
+### Phase 3: Subterranean Low-Background Isolation
+* **Status**: **PROPOSED / PLANNING**
+* **Milestone**: Mapping out facility requirements and experimental planning statements for future deployment inside deep-underground research facilities (e.g., LNGS, SNOLAB, SURF) to eliminate cosmic ray muon interference during long-exposure baseline runs.
+
+---
+
+## Open-Science Access and Governance
+This repository is dedicated to transparent peer evaluation, academic research, and baseline replication. All code, documentation, and wiki sub-pages hosted herein are strictly governed by our custom **Evaluation & Research License**. While public testing and algorithmic auditing are fully enabled, commercial application, derivative modification, and product resale are strictly prohibited. 
+
+* **Principal Systems Architect**: Kaya Gravitter
+* **Core Conceptual Analysis**: [Read the Live Article on Medium](https://medium.com)
