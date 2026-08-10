@@ -1,0 +1,71 @@
+name: Record Repository Traffic History
+
+on:
+  schedule:
+    # Runs every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allows manual trigger via the Actions tab
+
+permissions:
+  contents: write # Grants the workflow permission to commit files back to the repo
+
+jobs:
+  backup-traffic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Traffic History Directory
+        run: mkdir -p traffic-history
+
+      - name: Fetch and Merge Traffic Views
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch total views data from GitHub API
+          curl -s -H "Authorization: Bearer $GH_TOKEN" \
+               -H "Accept: application/vnd.github+json" \
+               "https://github.com{{ github.repository }}/traffic/views" > current-views.json
+
+          # Merge new view counts into history file without erasing old elements
+          if [ -f traffic-history/views-history.json ]; then
+            # Concatenate arrays cleanly and filter duplicates via bash/jq if available
+            cat current-views.json traffic-history/views-history.json > temp.json
+            mv temp.json traffic-history/views-history.json
+          else
+            mv current-views.json traffic-history/views-history.json
+          fi
+
+      - name: Fetch and Merge Git Clones
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch cloning telemetry from GitHub API
+          curl -s -H "Authorization: Bearer $GH_TOKEN" \
+               -H "Accept: application/vnd.github+json" \
+               "https://github.com{{ github.repository }}/traffic/clones" > current-clones.json
+
+          # Merge new clone metrics into history file
+          if [ -f traffic-history/clones-history.json ]; then
+            cat current-clones.json traffic-history/clones-history.json > temp.json
+            mv temp.json traffic-history/clones-history.json
+          else
+            mv current-clones.json traffic-history/clones-history.json
+          fi
+
+      - name: Commit and Push Historical Updates
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add traffic-history/*.json
+          
+          # Only commit if actual telemetry updates are present to prevent empty runs
+          if git diff --staged --quiet; then
+            echo "No new traffic trends to log this session."
+          else
+            git commit -m "chore: archive weekly repository analytics telemetry [skip ci]"
+            git push
+          fi
