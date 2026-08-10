@@ -23,7 +23,6 @@ jobs:
       - name: Fetch and Merge Traffic Views
         env:
           GH_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
-
         run: |
           # Fetch total views data from GitHub API
           curl -s -H "Authorization: Bearer $GH_TOKEN" \
@@ -41,8 +40,7 @@ jobs:
 
       - name: Fetch and Merge Git Clones
         env:
-          GH_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
-
+                    GH_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
         run: |
           # Fetch cloning telemetry from GitHub API
           curl -s -H "Authorization: Bearer $GH_TOKEN" \
